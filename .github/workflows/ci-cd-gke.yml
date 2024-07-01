@@ -32,9 +32,8 @@ jobs:
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v2'
       with:
-        token_format: 'access_token'
+        project_id: 'project-96203'
         workload_identity_provider: 'projects/866693006520/locations/global/workloadIdentityPools/github-actions/providers/github-actions-oidc'
-        service_account: 'github-actions-workflow@project-96203.iam.gserviceaccount.com'
 
     - name: Docker configuration
       run: |-
