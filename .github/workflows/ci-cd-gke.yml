@@ -32,7 +32,7 @@ jobs:
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v2'
       with:
-        project_id: '${{ env.PROJECT_ID }}'
+        project_id: ${{ env.PROJECT_ID }}
         workload_identity_provider: 'projects/866693006520/locations/global/workloadIdentityPools/github-actions/providers/github-actions-oidc'
 
     - name: Connect to Artifact Registry
