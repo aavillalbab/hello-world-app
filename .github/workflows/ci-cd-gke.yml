@@ -5,13 +5,14 @@ on:
     branches: [ "main" ]
 
 env:
-  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  PROJECT_ID: project-17560
+  PROJECT_NUMBER: 496133019347
   GAR_LOCATION: us-central1
-  GKE_CLUSTER: autopilot-cluster-1
+  GKE_CLUSTER: clouddemo-linux
   GKE_ZONE: us-central1-a
-  DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
-  REPOSITORY: hello-world-app
-  IMAGE: static-site
+  DEPLOYMENT_NAME: gke-test
+  REPOSITORY: clouddemo-linux
+  IMAGE: clouddemo
 
 jobs:
   setup-build-publish-deploy:
@@ -32,8 +33,10 @@ jobs:
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v2'
       with:
-        project_id: 'project-96203'
-        workload_identity_provider: 'projects/866693006520/locations/global/workloadIdentityPools/github-actions-dev/providers/github-actions-dev-oidc'
+        create_credentials_file: true
+        token_format: access_token
+        workload_identity_provider: projects/${{ env.PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-actions/providers/github-actions-oidc
+        service_account: github-actions-workflow@${{ env.PROJECT_ID }}.iam.gserviceaccount.com
 
     - name: Connect to Artifact Registry
       run: |-
